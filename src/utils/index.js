@@ -1,43 +1,23 @@
 /* eslint-disable camelcase */
 
-const ClientError = require('../exceptions/ClientError');
+const { ClientError } = require('../exceptions');
 
-const mapDBToModel = ({
-  id,
-  title,
-  year,
-  genre,
-  performer,
-  duration,
-  album_id,
-}) => ({
-  id,
-  title,
-  year,
-  genre,
-  performer,
-  duration,
-  albumId: album_id,
-});
+const catchErrorResponse = (request, h) => {
+  // mendapatkan konteks response dari request
+  const { response } = request;
 
-const catchErrorResponse = (error, h) => {
-  if (error instanceof ClientError) {
-    const response = h.response({
+  if (response instanceof ClientError) {
+    // membuat response baru dari response toolkit sesuai kebutuhan error handling
+    const newResponse = h.response({
       status: 'fail',
-      message: error.message,
+      message: response.message,
     });
-    response.code(error.statusCode);
-    return response;
+    newResponse.code(response.statusCode);
+    return newResponse;
   }
 
-  // Server ERROR!
-  const response = h.response({
-    status: 'error',
-    message: 'Maaf, terjadi kegagalan pada server kami.',
-  });
-  response.code(500);
-  console.error(error);
-  return response;
+  // jika bukan ClientError, lanjutkan dengan response sebelumnya (tanpa terintervensi)
+  return response.continue || response;
 };
 
-module.exports = { mapDBToModel, catchErrorResponse };
+module.exports = { catchErrorResponse };

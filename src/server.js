@@ -2,6 +2,7 @@ const Hapi = require('@hapi/hapi');
 const { songs, albums } = require('./api');
 const { SongsService, AlbumsService } = require('./services/postgres');
 const { SongsValidator, AlbumsValidator } = require('./validator');
+const { catchErrorResponse } = require('./utils');
 require('dotenv').config();
 
 const init = async () => {
@@ -33,6 +34,8 @@ const init = async () => {
       validator: AlbumsValidator,
     },
   });
+
+  server.ext('onPreResponse', catchErrorResponse);
 
   await server.start();
   console.log(`Server listen in ${server.info.uri}`);
