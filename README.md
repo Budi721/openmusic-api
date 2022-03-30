@@ -34,6 +34,8 @@ PGPORT=
 # server configuration
 HOST=
 PORT=
+ACCESS_TOKEN_KEY=
+REFRESH_TOKEN_KEY=
 ```
 
 4. alright tinggal menjalankan aplikasi
