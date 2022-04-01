@@ -103,21 +103,21 @@ exports.up = (pgm) => {
 
   pgm.createTable('playlist_song_activity', {
     id: {
-      type: 'VARCHAR(50)',
+      type: 'TEXT',
       notNull: true,
     },
     playlist_id: {
-      type: 'VARCHAR(50)',
+      type: 'TEXT',
       notNull: true,
       references: '"playlist"',
       onDelete: 'cascade',
     },
     song_id: {
-      type: 'VARCHAR(50)',
+      type: 'TEXT',
       notNull: true,
     },
     user_id: {
-      type: 'VARCHAR(50)',
+      type: 'TEXT',
       notNull: true,
     },
     action: {
@@ -125,7 +125,7 @@ exports.up = (pgm) => {
       notNull: true,
     },
     time: {
-      type: 'VARCHAR',
+      type: 'TEXT',
       notNull: true,
     },
   });
