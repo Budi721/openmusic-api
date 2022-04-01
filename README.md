@@ -36,6 +36,7 @@ HOST=
 PORT=
 ACCESS_TOKEN_KEY=
 REFRESH_TOKEN_KEY=
+ACCESS_TOKEN_AGE=
 ```
 
 4. alright tinggal menjalankan aplikasi

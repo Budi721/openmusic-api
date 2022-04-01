@@ -49,6 +49,11 @@ exports.up = (pgm) => {
     },
   });
   pgm.createIndex('song', 'album_id');
+  // pgm.addConstraint(
+  //   'song',
+  //   'fk_song.album_id_album.id',
+  //   'FOREIGN KEY(album_id) REFERENCES album(id) ON DELETE CASCADE',
+  // );
 };
 
 exports.down = (pgm) => {
